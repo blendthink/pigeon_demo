@@ -8,23 +8,21 @@ import io.flutter.embedding.engine.FlutterEngine
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainActivity : FlutterActivity() {
+class MainActivity : FlutterActivity(), MessageHostApi {
 
     private var count = 0
 
     private lateinit var flutterApi: MessageFlutterApi
 
     // 1. HostApi のコールバックを定義
-    private val apiHandler = object : MessageHostApi {
-        override fun getMessage(): String {
-            // 現在のメッセージを返す
-            return "$count sec pasted!"
-        }
+    override fun getMessage(): String {
+        // 現在のメッセージを返す
+        return "$count sec pasted!"
+    }
 
-        override fun showMessage(message: String) {
-            // ネイティブの機能でメッセージを表示
-            Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
-        }
+    override fun showMessage(message: String) {
+        // ネイティブの機能でメッセージを表示
+        Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
@@ -32,7 +30,7 @@ class MainActivity : FlutterActivity() {
         // 2. コールバックを登録して HostApi を初期化
         MessageHostApi.setUp(
             flutterEngine.dartExecutor.binaryMessenger,
-            apiHandler,
+            this@MainActivity,
         )
         // 3. FlutterApi は binaryMessenger 渡して初期化
         flutterApi = MessageFlutterApi(flutterEngine.dartExecutor.binaryMessenger)
@@ -41,14 +39,19 @@ class MainActivity : FlutterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 1秒ごとにメッセージを更新
-        // コルーチンスコープを Activity で簡単に扱うため androidx.lifecycle:lifecycle-runtime-ktx を dependencies に追加しています
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             while (true) {
                 delay(1000L)
-                count++
-                // 4. FlutterApiを呼び出す
-                flutterApi.onMessageChanged("$count sec passed!") {}
+                increment()
             }
         }
+    }
+
+    private fun increment() {
+        count++
+
+        // 4. FlutterApi を呼び出す
+        val message = getMessage()
+        flutterApi.onMessageChanged(message) {}
     }
 }
