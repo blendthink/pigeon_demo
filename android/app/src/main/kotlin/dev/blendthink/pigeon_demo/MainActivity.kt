@@ -2,7 +2,9 @@ package dev.blendthink.pigeon_demo
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import kotlinx.coroutines.delay
@@ -39,10 +41,14 @@ class MainActivity : FlutterActivity(), MessageHostApi {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 1秒ごとにメッセージを更新
-        lifecycleScope.launchWhenStarted {
-            while (true) {
-                delay(1000L)
-                increment()
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    while (true) {
+                        delay(1000L)
+                        increment()
+                    }
+                }
             }
         }
     }
