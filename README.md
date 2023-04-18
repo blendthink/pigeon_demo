@@ -6,11 +6,11 @@
 
 ### Android
 
-<video controls src="./docs/videos/android.webm" width="240px"></video>
+<video controls src="https://github.com/blendthink/pigeon_demo/raw/main/docs/videos/android.mp4"></video>
 
 ### iOS
 
-<video controls src="./docs/videos/ios.mp4" width="240px"></video>
+<video controls src="https://github.com/blendthink/pigeon_demo/raw/main/docs/videos/ios.mp4"></video>
 
 ## コマンド集
 
