@@ -68,4 +68,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // 2.6 系から Kotlin 1.8.10 が必要
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 }
