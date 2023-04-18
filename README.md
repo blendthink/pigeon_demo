@@ -6,11 +6,11 @@
 
 ### Android
 
-<video controls src="https://github.com/blendthink/pigeon_demo/raw/main/docs/videos/android.mp4"></video>
+https://user-images.githubusercontent.com/32213113/232854003-db257827-a066-4aef-9b25-de3fa089b5cf.mp4
 
 ### iOS
 
-<video controls src="https://github.com/blendthink/pigeon_demo/raw/main/docs/videos/ios.mp4"></video>
+https://user-images.githubusercontent.com/32213113/232854712-b64d5d9a-41a1-41c8-a0b1-b03e705a76e5.mp4
 
 ## コマンド集
 
