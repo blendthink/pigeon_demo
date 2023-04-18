@@ -4,7 +4,7 @@ import 'package:pigeon/pigeon.dart';
 abstract class MessageHostApi {
   String getMessage();
 
-  void shoMessage(String message);
+  void showMessage(String message);
 }
 
 @FlutterApi()

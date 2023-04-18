@@ -45,9 +45,9 @@ class MessageHostApi {
     }
   }
 
-  Future<void> shoMessage(String arg_message) async {
+  Future<void> showMessage(String arg_message) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.MessageHostApi.shoMessage', codec,
+        'dev.flutter.pigeon.MessageHostApi.showMessage', codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_message]) as List<Object?>?;

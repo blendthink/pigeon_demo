@@ -36,7 +36,7 @@ private func nilOrValue<T>(_ value: Any?) -> T? {
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol MessageHostApi {
   func getMessage() throws -> String
-  func shoMessage(message: String) throws
+  func showMessage(message: String) throws
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -57,20 +57,20 @@ class MessageHostApiSetup {
     } else {
       getMessageChannel.setMessageHandler(nil)
     }
-    let shoMessageChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.MessageHostApi.shoMessage", binaryMessenger: binaryMessenger)
+    let showMessageChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.MessageHostApi.showMessage", binaryMessenger: binaryMessenger)
     if let api = api {
-      shoMessageChannel.setMessageHandler { message, reply in
+      showMessageChannel.setMessageHandler { message, reply in
         let args = message as! [Any]
         let messageArg = args[0] as! String
         do {
-          try api.shoMessage(message: messageArg)
+          try api.showMessage(message: messageArg)
           reply(wrapResult(nil))
         } catch {
           reply(wrapError(error))
         }
       }
     } else {
-      shoMessageChannel.setMessageHandler(nil)
+      showMessageChannel.setMessageHandler(nil)
     }
   }
 }

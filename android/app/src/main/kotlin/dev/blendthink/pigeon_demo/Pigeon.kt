@@ -45,7 +45,7 @@ class FlutterError (
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
 interface MessageHostApi {
   fun getMessage(): String
-  fun shoMessage(message: String)
+  fun showMessage(message: String)
 
   companion object {
     /** The codec used by MessageHostApi. */
@@ -72,14 +72,14 @@ interface MessageHostApi {
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.MessageHostApi.shoMessage", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.MessageHostApi.showMessage", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val messageArg = args[0] as String
             var wrapped: List<Any?>
             try {
-              api.shoMessage(messageArg)
+              api.showMessage(messageArg)
               wrapped = listOf<Any?>(null)
             } catch (exception: Throwable) {
               wrapped = wrapError(exception)
